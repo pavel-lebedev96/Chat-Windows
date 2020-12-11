@@ -13,7 +13,7 @@ void receive_messages()
 	{
 		char szResponse[256];
 		string s;
-		//Пытаемся получить ответ от сервера
+		//С•С‹С‚Р°РµРјСЃВ¤ РїРѕР»СѓС‡РёС‚СЊ РѕС‚РІРµС‚ РѕС‚ СЃРµСЂРІРµСЂР°
 		int retVal = recv(clientSock, szResponse, 256, 0);
 		if (retVal == SOCKET_ERROR)
 		{
@@ -47,7 +47,7 @@ int main()
 		system("pause");
 		return 1;
 	}
-	//Создаем сокет
+	//вЂ”РѕР·РґР°РµРј СЃРѕРєРµС‚
 	clientSock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (clientSock == SOCKET_ERROR)
 	{
@@ -65,7 +65,7 @@ int main()
 	serverInfo.sin_family = PF_INET;
 	serverInfo.sin_addr.S_un.S_addr = inet_addr(ip.c_str());
 	serverInfo.sin_port = htons(2005);
-	//Пытаемся присоединится к серверу по ip и port
+	//С•С‹С‚Р°РµРјСЃВ¤ РїСЂРёСЃРѕРµРґРёРЅРёС‚СЃВ¤ Рє СЃРµСЂРІРµСЂСѓ РїРѕ ip Рё port
 	retVal = connect(clientSock, (LPSOCKADDR)&serverInfo, sizeof(serverInfo));
 	if (retVal == SOCKET_ERROR)
 	{
@@ -81,7 +81,7 @@ int main()
 	{
 		string s;
 		getline(cin,s,'\n');
-		//Отсылаем данные на сервер
+		//СњС‚СЃС‹Р»Р°РµРј РґР°РЅРЅС‹Рµ РЅР° СЃРµСЂРІРµСЂ
 		retVal = send(clientSock, s.c_str(), s.size(), 0);
 		if (s == "exit")
 		{

@@ -12,7 +12,7 @@ SOCKET servSock;
 std::mutex mtx;
 std::vector<SOCKET> clients;
 int users=0;
-//удаление пользователя из вектора clients
+//СѓРґР°Р»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РёР· РІРµРєС‚РѕСЂР° clients
 void client_delete(int cur_user)
 {
 	mtx.lock();
@@ -39,7 +39,7 @@ void chat(SOCKET clientSock, SOCKADDR_IN from)
 		std::string s;
 		for (int i = 0; i < retVal; ++i)
 			s.push_back(szReq[i]);
-		// Команда на выключение сервера
+		// РљРѕРјР°РЅРґР° РЅР° РІС‹РєР»СЋС‡РµРЅРёРµ СЃРµСЂРІРµСЂР°
 		if (s == "shut down")
 		{
 			s = "server was shut down\n";
@@ -78,7 +78,7 @@ int main(void)
 	std::string s;
 	sockVer = MAKEWORD(2, 2);
 	WSAStartup(sockVer, &wsaData);
-	//Создаем сокет
+	//РЎРѕР·РґР°РµРј СЃРѕРєРµС‚
 	servSock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 	if (servSock == INVALID_SOCKET)
@@ -106,7 +106,7 @@ int main(void)
 	std::cout << "Server started at " << inet_ntoa(sin.sin_addr) << ", port " << htons(sin.sin_port) << std::endl;
 	while (true)
 	{
-		//Пытаемся начать слушать сокет
+		//РџС‹С‚Р°РµРјСЃСЏ РЅР°С‡Р°С‚СЊ СЃР»СѓС€Р°С‚СЊ СЃРѕРєРµС‚
 		retVal = listen(servSock, 2005);
 		if (retVal == SOCKET_ERROR)
 		{
@@ -115,7 +115,7 @@ int main(void)
 			system("pause");
 			return SOCKET_ERROR;
 		}
-		//Ждем клиента
+		//Р–РґРµРј РєР»РёРµРЅС‚Р°
 		SOCKET clientSock;
 		SOCKADDR_IN from;
 		int fromlen = sizeof(from);
@@ -132,7 +132,7 @@ int main(void)
 			client_th->detach();
 		}
 	}
-	//Закрываем сокет	
+	//Р—Р°РєСЂС‹РІР°РµРј СЃРѕРєРµС‚	
 	closesocket(servSock);
 	WSACleanup();
 	return 0;
